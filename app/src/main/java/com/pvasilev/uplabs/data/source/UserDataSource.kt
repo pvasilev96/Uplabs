@@ -5,4 +5,8 @@ import io.reactivex.Single
 
 interface UserDataSource {
     fun getUser(id: Int): Single<User>
+
+    fun getFollowers(): Single<List<User>>
+
+    fun getFollowing(): Single<List<User>>
 }
