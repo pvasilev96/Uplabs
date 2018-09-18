@@ -1,7 +1,8 @@
-package com.pvasilev.uplabs
+package com.pvasilev.uplabs.presentation
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.pvasilev.uplabs.R
 
 class MainActivity : AppCompatActivity() {
 
