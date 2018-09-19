@@ -5,9 +5,9 @@ import com.pvasilev.uplabs.presentation.mvi.MviIntent
 sealed class PostsIntent : MviIntent {
     object InitialIntent : PostsIntent()
 
-    object RefreshIntent : PostsIntent()
+    data class RefreshIntent(val filter: PostsFilterType) : PostsIntent()
 
-    data class LoadMoreIntent(val page: Int) : PostsIntent()
+    data class LoadMoreIntent(val page: Int, val filter: PostsFilterType) : PostsIntent()
 
     data class ChangeFilterIntent(val filter: PostsFilterType) : PostsIntent()
 }

@@ -8,4 +8,8 @@ data class PostsViewState(
         val filter: PostsFilterType,
         val posts: List<Post>,
         val error: Throwable?
-) : MviViewState
+) : MviViewState {
+    companion object {
+        fun default() = PostsViewState(true, PostsFilterType.ANDROID, listOf(), null)
+    }
+}
