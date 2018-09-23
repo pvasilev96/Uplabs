@@ -43,6 +43,7 @@ dependencies {
     implementation("com.github.stephanenicolas.toothpick:smoothie:1.1.3")
     kapt("com.github.stephanenicolas.toothpick:toothpick-compiler:1.1.3")
     implementation("android.arch.lifecycle:viewmodel:1.1.1")
+    implementation("android.arch.lifecycle:extensions:1.1.1")
     implementation("ru.terrakok.cicerone:cicerone:3.0.0")
     implementation("com.jakewharton.timber:timber:4.7.1")
     implementation("com.jakewharton.threetenabp:threetenabp:1.1.0")
