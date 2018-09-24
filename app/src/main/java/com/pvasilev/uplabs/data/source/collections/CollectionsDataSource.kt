@@ -1,4 +1,4 @@
-package com.pvasilev.uplabs.data.source
+package com.pvasilev.uplabs.data.source.collections
 
 import com.pvasilev.uplabs.data.model.Collection
 import io.reactivex.Single

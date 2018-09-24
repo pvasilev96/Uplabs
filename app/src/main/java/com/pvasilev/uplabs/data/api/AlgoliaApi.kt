@@ -20,8 +20,6 @@ interface AlgoliaApi {
     @GET("1/indexes/collections_production_heroku")
     fun searchCollections(
             @Query("query") query: String? = null,
-            @Query("facets") facets: String? = null,
-            @Query("facetFilters") facetFilters: List<String>? = null,
             @Query("numericFilters") numericFilters: List<String>? = null,
             @Query("hitsPerPage") hitsPerPage: Int
     ): Single<SearchResult<Collection>>
