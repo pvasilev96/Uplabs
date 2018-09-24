@@ -14,6 +14,7 @@ interface AlgoliaApi {
             @Query("facets") facets: String? = null,
             @Query("facetFilters") facetFilters: List<String>? = null,
             @Query("numericFilters") numericFilters: List<String>? = null,
+            @Query("page") page: Int,
             @Query("hitsPerPage") hitsPerPage: Int
     ): Single<SearchResult<Post>>
 
@@ -21,6 +22,7 @@ interface AlgoliaApi {
     fun searchCollections(
             @Query("query") query: String? = null,
             @Query("numericFilters") numericFilters: List<String>? = null,
+            @Query("page") page: Int,
             @Query("hitsPerPage") hitsPerPage: Int
     ): Single<SearchResult<Collection>>
 }
