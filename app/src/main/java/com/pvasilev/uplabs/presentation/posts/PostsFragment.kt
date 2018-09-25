@@ -12,7 +12,7 @@ import com.pvasilev.uplabs.presentation.UplabsViewModelFactory
 import com.pvasilev.uplabs.presentation.mvi.MviView
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
-import kotlinx.android.synthetic.main.fragment_posts.*
+import kotlinx.android.synthetic.main.layout_list.*
 
 class PostsFragment : Fragment(), MviView<PostsIntent, PostsViewState> {
     private val viewModel: PostsViewModel by lazy {

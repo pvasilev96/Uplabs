@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Uplabs</string>
+    <string name="category_android">Android</string>
+    <string name="category_ios">iOs</string>
+    <string name="category_web">Web</string>
+    <string name="category_motion">Motion</string>
+    <string name="category_illustration">Illustration</string>
+    <string name="category_ar">AR</string>
+    <string name="category_branding">Branding</string>
 </resources>
