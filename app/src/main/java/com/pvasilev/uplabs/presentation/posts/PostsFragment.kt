@@ -23,7 +23,7 @@ class PostsFragment : Fragment(), MviView<PostsIntent, PostsViewState> {
     private val disposables: CompositeDisposable = CompositeDisposable()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            inflater.inflate(R.layout.fragment_posts, container, false)
+            inflater.inflate(R.layout.fragment_posts_expanded, container, false)
 
     override fun onResume() {
         super.onResume()
