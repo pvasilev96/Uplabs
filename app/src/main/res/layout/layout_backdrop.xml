@@ -10,30 +10,37 @@
     android:paddingEnd="16dp">
 
     <Button
+        android:id="@+id/btn_illustration"
         style="@style/CategoryButton"
         android:text="@string/category_illustration" />
 
     <Button
+        android:id="@+id/btn_android"
         style="@style/CategoryButton"
         android:text="@string/category_android" />
 
     <Button
+        android:id="@+id/btn_ios"
         style="@style/CategoryButton"
         android:text="@string/category_ios" />
 
     <Button
+        android:id="@+id/btn_web"
         style="@style/CategoryButton"
         android:text="@string/category_web" />
 
     <Button
+        android:id="@+id/btn_ar"
         style="@style/CategoryButton"
         android:text="@string/category_ar" />
 
     <Button
+        android:id="@+id/btn_branding"
         style="@style/CategoryButton"
         android:text="@string/category_branding" />
 
     <Button
+        android:id="@+id/btn_motion"
         style="@style/CategoryButton"
         android:text="@string/category_motion" />
 

@@ -7,4 +7,5 @@
     <string name="category_illustration">Illustration</string>
     <string name="category_ar">AR</string>
     <string name="category_branding">Branding</string>
+    <string name="menu_filter">Filter</string>
 </resources>
