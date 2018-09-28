@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import com.jakewharton.rxbinding2.support.v4.widget.refreshes
 import com.jakewharton.rxbinding2.view.clicks
 import com.pvasilev.uplabs.R
-import com.pvasilev.uplabs.presentation.UplabsViewModelFactory
+import com.pvasilev.uplabs.presentation.ViewModelFactory
 import com.pvasilev.uplabs.presentation.mvi.MviView
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.layout_list.*
 
 class PostsFragment : Fragment(), MviView<PostsIntent, PostsViewState> {
     private val viewModel: PostsViewModel by lazy {
-        ViewModelProviders.of(this, UplabsViewModelFactory)
+        ViewModelProviders.of(this, ViewModelFactory)
                 .get(PostsViewModel::class.java)
     }
 

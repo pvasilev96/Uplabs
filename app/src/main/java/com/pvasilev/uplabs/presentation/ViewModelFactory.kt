@@ -6,7 +6,7 @@ import com.pvasilev.uplabs.di.DI
 import com.pvasilev.uplabs.presentation.posts.PostsViewModel
 import toothpick.Toothpick
 
-object UplabsViewModelFactory : ViewModelProvider.Factory {
+object ViewModelFactory : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return if (modelClass == PostsViewModel::class.java) {
