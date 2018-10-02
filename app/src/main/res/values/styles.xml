@@ -12,6 +12,7 @@
     <style name="CategoryButton" parent="Widget.AppCompat.Button.Borderless.Colored">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:button">@null</item>
         <item name="android:background">@drawable/selector_category</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:layout_marginTop">12dp</item>

@@ -9,39 +9,47 @@
     android:paddingTop="?attr/actionBarSize"
     android:paddingEnd="16dp">
 
-    <Button
+   <RadioGroup
+       android:id="@+id/category_group"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+
+    <RadioButton
         android:id="@+id/btn_illustration"
         style="@style/CategoryButton"
         android:text="@string/category_illustration" />
 
-    <Button
+    <RadioButton
         android:id="@+id/btn_android"
         style="@style/CategoryButton"
+        android:checked="true"
         android:text="@string/category_android" />
 
-    <Button
+    <RadioButton
         android:id="@+id/btn_ios"
         style="@style/CategoryButton"
         android:text="@string/category_ios" />
 
-    <Button
+    <RadioButton
         android:id="@+id/btn_web"
         style="@style/CategoryButton"
         android:text="@string/category_web" />
 
-    <Button
+    <RadioButton
         android:id="@+id/btn_ar"
         style="@style/CategoryButton"
         android:text="@string/category_ar" />
 
-    <Button
+    <RadioButton
         android:id="@+id/btn_branding"
         style="@style/CategoryButton"
         android:text="@string/category_branding" />
 
-    <Button
+    <RadioButton
         android:id="@+id/btn_motion"
         style="@style/CategoryButton"
         android:text="@string/category_motion" />
+
+   </RadioGroup>
 
 </LinearLayout>

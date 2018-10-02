@@ -58,7 +58,7 @@ class PostsFragment : Fragment(), MviView<PostsIntent, PostsViewState> {
             Observable.just(PostsIntent.InitialIntent)
 
     private fun refreshIntent(): Observable<PostsIntent.RefreshIntent> =
-            swipeToRefresh.refreshes().map { PostsIntent.RefreshIntent(PostsFilterType.ANDROID) }
+            swipeToRefresh.refreshes().map { PostsIntent.RefreshIntent(getSelectedCategory()) }
 
 
     private fun changeFilterIntent(): Observable<PostsIntent.ChangeFilterIntent> =
@@ -71,4 +71,16 @@ class PostsFragment : Fragment(), MviView<PostsIntent, PostsViewState> {
                     btn_branding.clicks().map { PostsFilterType.BRANDING },
                     btn_motion.clicks().map { PostsFilterType.MOTION }
             ).distinctUntilChanged().map { PostsIntent.ChangeFilterIntent(it) }
+
+    private fun getSelectedCategory(): PostsFilterType =
+            when (category_group.checkedRadioButtonId) {
+                R.id.btn_illustration -> PostsFilterType.ILLUSTRATION
+                R.id.btn_android -> PostsFilterType.ANDROID
+                R.id.btn_ios -> PostsFilterType.IOS
+                R.id.btn_web -> PostsFilterType.WEB
+                R.id.btn_ar -> PostsFilterType.AR
+                R.id.btn_branding -> PostsFilterType.BRANDING
+                R.id.btn_motion -> PostsFilterType.MOTION
+                else -> PostsFilterType.ANDROID
+            }
 }
