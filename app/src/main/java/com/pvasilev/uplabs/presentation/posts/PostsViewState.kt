@@ -5,11 +5,10 @@ import com.pvasilev.uplabs.presentation.mvi.MviViewState
 
 data class PostsViewState(
         val isLoading: Boolean,
-        val filter: PostsFilterType,
         val posts: List<Post>,
         val error: Throwable?
 ) : MviViewState {
     companion object {
-        fun default() = PostsViewState(true, PostsFilterType.ANDROID, listOf(), null)
+        fun default() = PostsViewState(true, listOf(), null)
     }
 }

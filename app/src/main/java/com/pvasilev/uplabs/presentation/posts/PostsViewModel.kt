@@ -29,7 +29,7 @@ class PostsViewModel @Inject constructor(postsActionProcessor: PostsActionProces
 
     private fun reducer(previousState: PostsViewState, result: PostsResult): PostsViewState = when (result) {
         is LoadingResult -> when (result) {
-            is LoadingResult.Success -> previousState.copy(isLoading = false, posts = result.posts, filter = result.filter)
+            is LoadingResult.Success -> previousState.copy(isLoading = false, posts = result.posts)
             is LoadingResult.Failure -> previousState.copy(isLoading = false, error = result.error)
         }
     }

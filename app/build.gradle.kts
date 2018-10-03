@@ -38,6 +38,7 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.4.0")
     implementation("com.squareup.retrofit2:adapter-rxjava2:2.4.0")
     implementation("com.squareup.retrofit2:converter-moshi:2.4.0")
+    implementation("com.squareup.moshi:moshi-kotlin:1.7.0")
     implementation("com.squareup.okhttp3:logging-interceptor:3.11.0")
     implementation("com.github.stephanenicolas.toothpick:toothpick-runtime:1.1.3")
     implementation("com.github.stephanenicolas.toothpick:smoothie:1.1.3")
