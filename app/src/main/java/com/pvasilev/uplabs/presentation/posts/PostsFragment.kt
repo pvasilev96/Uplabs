@@ -3,12 +3,16 @@ package com.pvasilev.uplabs.presentation.posts
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.hannesdorfmann.adapterdelegates3.AdapterDelegatesManager
+import com.hannesdorfmann.adapterdelegates3.ListDelegationAdapter
 import com.jakewharton.rxbinding2.support.v4.widget.refreshes
 import com.jakewharton.rxbinding2.view.clicks
 import com.pvasilev.uplabs.R
+import com.pvasilev.uplabs.data.model.Post
 import com.pvasilev.uplabs.presentation.ViewModelFactory
 import com.pvasilev.uplabs.presentation.mvi.MviView
 import io.reactivex.Observable
@@ -30,6 +34,12 @@ class PostsFragment : Fragment(), MviView<PostsIntent, PostsViewState> {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         toolbar.inflateMenu(R.menu.main_menu)
+        recyclerView.adapter = ListDelegationAdapter<List<Post?>>(
+                AdapterDelegatesManager<List<Post?>>()
+                        .addDelegate(PostsAdapterDelegate())
+                        .addDelegate(ProgressAdapterDelegate())
+        )
+        recyclerView.layoutManager = GridLayoutManager(context, 2)
     }
 
     override fun onResume() {

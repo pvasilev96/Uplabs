@@ -50,6 +50,7 @@ dependencies {
     implementation("com.jakewharton.threetenabp:threetenabp:1.1.0")
     implementation("com.github.bumptech.glide:glide:4.8.0")
     implementation("de.hdodenhof:circleimageview:2.2.0")
+    implementation("com.hannesdorfmann:adapterdelegates3:3.1.0")
     testImplementation("junit:junit:4.12")
     androidTestImplementation("com.android.support.test:runner:1.0.2")
     androidTestImplementation("com.android.support.test.espresso:espresso-core:3.0.2")
