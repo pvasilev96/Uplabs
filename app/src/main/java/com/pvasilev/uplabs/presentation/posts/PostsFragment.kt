@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegatesManager
-import com.hannesdorfmann.adapterdelegates3.ListDelegationAdapter
+import com.hannesdorfmann.adapterdelegates3.AsyncListDifferDelegationAdapter
 import com.jakewharton.rxbinding2.support.v4.widget.refreshes
 import com.jakewharton.rxbinding2.view.clicks
 import com.pvasilev.uplabs.R
@@ -34,7 +34,8 @@ class PostsFragment : Fragment(), MviView<PostsIntent, PostsViewState> {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         toolbar.inflateMenu(R.menu.main_menu)
-        recyclerView.adapter = ListDelegationAdapter<List<Post?>>(
+        recyclerView.adapter = AsyncListDifferDelegationAdapter(
+                PostsDiffCallback(),
                 AdapterDelegatesManager<List<Post?>>()
                         .addDelegate(PostsAdapterDelegate())
                         .addDelegate(ProgressAdapterDelegate())
@@ -61,7 +62,8 @@ class PostsFragment : Fragment(), MviView<PostsIntent, PostsViewState> {
             )
 
     override fun render(state: PostsViewState) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val adapter = recyclerView.adapter as AsyncListDifferDelegationAdapter<*>
+        adapter.items = state.posts
     }
 
     private fun initialIntent(): Observable<PostsIntent.InitialIntent> =
