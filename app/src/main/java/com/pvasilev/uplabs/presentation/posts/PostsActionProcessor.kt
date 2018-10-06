@@ -1,6 +1,8 @@
 package com.pvasilev.uplabs.presentation.posts
 
 import com.pvasilev.uplabs.data.source.posts.PostsRepository
+import com.pvasilev.uplabs.presentation.posts.PostsResult.LoadingMoreResult
+import com.pvasilev.uplabs.presentation.posts.PostsResult.LoadingResult
 import io.reactivex.Observable
 import io.reactivex.ObservableSource
 import io.reactivex.ObservableTransformer
@@ -19,12 +21,23 @@ class PostsActionProcessor @Inject constructor(private val postsRepository: Post
 
     private val loadPostsProcessor = ObservableTransformer<PostsAction.LoadPostsAction, PostsResult> { actions ->
         actions.flatMap { action ->
-            postsRepository.getPosts(action.page, action.filterType).toObservable()
-                    .map { posts -> PostsResult.LoadingResult.Success(posts) }
-                    .cast(PostsResult.LoadingResult::class.java)
-                    .onErrorReturn(PostsResult.LoadingResult::Failure)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
+            if (action.page == 0) {
+                postsRepository.getPosts(action.page, action.filterType).toObservable()
+                        .map { posts -> LoadingResult.Success(posts) }
+                        .cast(LoadingResult::class.java)
+                        .onErrorReturn(LoadingResult::Failure)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .startWith(LoadingResult.Loading)
+            } else {
+                postsRepository.getPosts(action.page, action.filterType).toObservable()
+                        .map { posts -> LoadingMoreResult.Success(posts) }
+                        .cast(LoadingMoreResult::class.java)
+                        .onErrorReturn(LoadingMoreResult::Failure)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .startWith(LoadingMoreResult.Loading)
+            }
         }
     }
 }

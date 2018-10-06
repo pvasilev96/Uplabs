@@ -11,6 +11,7 @@ import com.hannesdorfmann.adapterdelegates3.AdapterDelegatesManager
 import com.hannesdorfmann.adapterdelegates3.AsyncListDifferDelegationAdapter
 import com.jakewharton.rxbinding2.support.v4.widget.refreshes
 import com.jakewharton.rxbinding2.view.clicks
+import com.jakewharton.rxbinding2.view.scrollChangeEvents
 import com.pvasilev.uplabs.R
 import com.pvasilev.uplabs.data.model.Post
 import com.pvasilev.uplabs.presentation.ViewModelFactory
@@ -40,7 +41,13 @@ class PostsFragment : Fragment(), MviView<PostsIntent, PostsViewState> {
                         .addDelegate(PostsAdapterDelegate())
                         .addDelegate(ProgressAdapterDelegate())
         )
-        recyclerView.layoutManager = GridLayoutManager(context, 2)
+        recyclerView.layoutManager = GridLayoutManager(context, 2).apply {
+            spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int =
+                        if ((recyclerView.adapter as AsyncListDifferDelegationAdapter<*>).items[position] != null) 1
+                        else 2
+            }
+        }
     }
 
     override fun onResume() {
@@ -58,12 +65,14 @@ class PostsFragment : Fragment(), MviView<PostsIntent, PostsViewState> {
             Observable.merge(
                     initialIntent(),
                     refreshIntent(),
+                    loadMoreIntent(),
                     changeFilterIntent()
             )
 
     override fun render(state: PostsViewState) {
         val adapter = recyclerView.adapter as AsyncListDifferDelegationAdapter<*>
         adapter.items = state.posts
+        swipeToRefresh.isRefreshing = state.isLoading
     }
 
     private fun initialIntent(): Observable<PostsIntent.InitialIntent> =
@@ -83,6 +92,15 @@ class PostsFragment : Fragment(), MviView<PostsIntent, PostsViewState> {
                     btn_branding.clicks().map { PostsFilterType.BRANDING },
                     btn_motion.clicks().map { PostsFilterType.MOTION }
             ).distinctUntilChanged().map { PostsIntent.ChangeFilterIntent(it) }
+
+    private fun loadMoreIntent(): Observable<PostsIntent.LoadMoreIntent> =
+            recyclerView.scrollChangeEvents()
+                    .filter {
+                        val layoutManager = recyclerView.layoutManager as GridLayoutManager
+                        val isLoading = (recyclerView.adapter as AsyncListDifferDelegationAdapter<*>).items.contains(null)
+                        !isLoading && layoutManager.findFirstVisibleItemPosition() + layoutManager.childCount >= layoutManager.itemCount
+                    }
+                    .map { PostsIntent.LoadMoreIntent((recyclerView.adapter.itemCount / 12) + 1, getSelectedCategory()) }
 
     private fun getSelectedCategory(): PostsFilterType =
             when (category_group.checkedRadioButtonId) {
