@@ -1,6 +1,7 @@
 package com.pvasilev.uplabs.presentation.posts
 
 import android.arch.lifecycle.ViewModel
+import com.pvasilev.uplabs.presentation.common.notOfType
 import com.pvasilev.uplabs.presentation.mvi.MviViewModel
 import com.pvasilev.uplabs.presentation.posts.PostsIntent.*
 import com.pvasilev.uplabs.presentation.posts.PostsResult.LoadingMoreResult
@@ -13,13 +14,23 @@ class PostsViewModel @Inject constructor(postsActionProcessor: PostsActionProces
     private val intentsSubject: PublishSubject<PostsIntent> = PublishSubject.create()
 
     private val statesObservable: Observable<PostsViewState> = intentsSubject
+            .compose(this::filterIntents)
             .map(this::actionFromIntent)
             .compose(postsActionProcessor)
             .scan(PostsViewState.default(), this::reducer)
+            .replay(1)
+            .autoConnect()
 
     override fun processIntents(intents: Observable<PostsIntent>) = intents.subscribe(intentsSubject)
 
     override fun states(): Observable<PostsViewState> = statesObservable
+
+    private fun filterIntents(intents: Observable<PostsIntent>) = intents.publish { shared ->
+        Observable.merge(
+                shared.ofType(InitialIntent::class.java).take(1),
+                shared.notOfType(InitialIntent::class.java)
+        )
+    }
 
     private fun actionFromIntent(intent: PostsIntent): PostsAction = when (intent) {
         is InitialIntent -> PostsAction.LoadPostsAction(0, PostsFilterType.ANDROID)

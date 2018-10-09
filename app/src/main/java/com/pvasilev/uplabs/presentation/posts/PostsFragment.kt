@@ -50,14 +50,14 @@ class PostsFragment : Fragment(), MviView<PostsIntent, PostsViewState> {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
         disposables.add(viewModel.states().subscribe(this::render))
         viewModel.processIntents(intents())
     }
 
-    override fun onPause() {
-        super.onPause()
+    override fun onStop() {
+        super.onStop()
         disposables.clear()
     }
 
